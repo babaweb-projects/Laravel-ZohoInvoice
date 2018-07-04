@@ -11,6 +11,9 @@
 			if($this->isLumen()){
 				return;
 			}
+			$this->publishes([
+          		__DIR__.'/../config/config.php' => config_path('zohoinvoice.php'),
+      		]);
 		}
 
 		public function register()
@@ -27,7 +30,7 @@
 
 				$config = [];
 				$config['authtoken'] = config('zohoinvoice.authtoken');
-				$config['organization_id'] = config('zohoinvoice.organization');
+				$config['organization_id'] = config('zohoinvoice.organization_id');
 				$config['baseurl'] = config('zohoinvoice.baseurl', 'https://invoice.zoho.eu/api/v3');
 				return new ZohoInvoiceClient($config);
 			});
