@@ -58,6 +58,81 @@
 			}		
 		}
 
+		public function getContactList(){
+			$this->method = 'GET';
+			$resource['resource'] = 'contacts';
+			$params['authtoken'] = $this->authtoken;
+			$params['organization_id'] = $this->organization_id;
+			return $this->call($resource, $params);
+		}
+
+		public function getInvoiceList($customer_id){
+			$this->method = 'GET';
+			$resource['resource'] = 'invoices';
+			$params['authtoken'] = $this->authtoken;
+			$params['organization_id'] = $this->organization_id;
+			$params['customer_id'] = $customer_id;
+			return $this->call($resource, $params);
+		}
+
+		public function getInvoiceByID($invoice_id){
+			$this->method = 'GET';
+			$resource['resource'] = 'invoices';
+			$resource['id'] = $invoice_id;
+			$params['authtoken'] = $this->authtoken;
+			$params['organization_id'] = $this->organization_id;
+			$params['customer_id'] = $customer_id;
+			return $this->call($resource, $params);
+		}
+
+		public function getInvoicePaymentsByID($invoice_id){
+			$this->method = 'GET';
+			$resource['resource'] = 'invoices';
+			$resource['id'] = $invoice_id;
+			$resource['additional'] = 'payments';
+			$params['authtoken'] = $this->authtoken;
+			$params['organization_id'] = $this->organization_id;
+			$params['customer_id'] = $customer_id;
+			return $this->call($resource, $params);
+		}
+
+		public function createItem($parameters){
+			$this->method = 'POST';
+			$resource['resource'] = 'items';
+			$params['authtoken'] = $this->authtoken;
+			$params['organization_id'] = $this->organization_id;
+			$params['JSONString'] = json_encode($parameters);
+			return $this->call($resource, $params);
+		}
+
+		public function createInvoice($parameters){
+			$this->method = 'POST';
+			$resource['resource'] = 'invoices';
+			$params['authtoken'] = $this->authtoken;
+			$params['organization_id'] = $this->organization_id;
+			$params['JSONString'] = json_encode($parameters);
+			return $this->call($resource, $params);
+		}
+
+		public function createContact($parameters){
+			$this->method = 'POST';
+			$resource['resource'] = 'contacts';
+			$params['authtoken'] = $this->authtoken;
+			$params['organization_id'] = $this->organization_id;
+			$params['JSONString'] = json_encode($parameters);
+			return $this->call($resource, $params);
+		}
+
+		public function updateItem($item_id, $parameters){
+			$this->method = 'PUT';
+			$resource['resource'] = 'items';
+			$resource['id'] = $item_id;
+			$params['authtoken'] = $this->authtoken;
+			$params['organization_id'] = $this->organization_id;
+			$params['JSONString'] = json_encode($parameters);
+			return $this->call($resource, $params);
+		}
+
 		public function get($resource, $params = []) {
 			$this->method = 'GET';
 			return $this->call($resource, $params);
