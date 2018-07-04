@@ -55,42 +55,31 @@
 				return $this->baseUrl . $resource['resource'] . '/' . $resource['id'] . '/' . $resource['additional'];
 			} else {
 				return $this->baseUrl . $resource['resource'] . '/' . $resource['id'];
-			}
-			
+			}		
 		}
 
-		public function createItems($resource, $params = [])
+		public function get($resource, $params = []) {
+			$this->method = 'GET';
+			return $this->call($resource, $params);
+		}
+
+		public function post($resource, $params = [])
 		{
 			$this->method = 'POST';
 			return $this->call($resource, $params);
 		}
 
-		public function updateItems($resource, $params = [])
+		public function put($resource, $params = [])
 		{
-			if(!isset($params['id'])){
-				throw new Exception('Item id is required');
+			if(!isset($resource['id'])){
+				throw new Exception('id is required');
 			}
 			$this->method = 'PUT';
 			return $this->call($resource, $params);
 		}
 
-		public function createInvoice($resource, $params = []) {
-			$this->method = 'POST';
-			return $this->call($resource, $params);
-		}
-
 		public function createContact($resource, $params = []) {
 			$this->method = 'POST';
-			return $this->call($resource, $params);
-		}
-
-		public function getContactList($resource, $params = []) {
-			$this->method = 'GET';
-			return $this->call($resource, $params);
-		}
-
-		public function getInvoicePayment($resource, $params = []) {
-			$this->method = 'GET';
 			return $this->call($resource, $params);
 		}
 
@@ -105,24 +94,18 @@
 			if(!isset($params['organization_id'])){
 				$params['organization_id'] = $this->organization_id;
 			}
-
 			$finalUrl = $url . '?' . $this->parseParams($params);
-
-			$response = $this->client->post($finalUrl);
+			$response = $this->client->request($this->method, $finalUrl);
 
 			if(!isset($response)) {
 				throw new Exception('No response.');
 			}
 
-			if($response->getStatusCode() !== 200){
-				throw new Exception($response->getBody());
-			}
-
 			if($rawResponse){
 				return $response->getBody();
 			}
-
-			return $this->getResponse($response->getBody());
+			$response = \GuzzleHttp\json_decode($response->getBody());
+			return $response;
 		}
 
 		public function getResponse($response)
