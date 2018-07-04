@@ -4,7 +4,7 @@
 
 	use Illuminate\Support\ServiceProvider;
 
-	class ZohoInvoiceProvider extends ServiceProvider
+	class ZohoInvoiceServiceProvider extends ServiceProvider
 	{
 		public function boot()
 		{
