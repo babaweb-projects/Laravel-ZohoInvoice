@@ -61,7 +61,7 @@
 		public function getContactList(){
 			$this->method = 'GET';
 			$resource['resource'] = 'contacts';
-			return $this->call($resource, $params);
+			return $this->call($resource);
 		}
 
 		public function getInvoiceList($customer_id){
