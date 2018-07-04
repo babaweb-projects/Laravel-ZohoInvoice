@@ -11,10 +11,11 @@
 			if($this->isLumen()){
 				return;
 			}
+/*			
 			$this->publishes([
           		__DIR__.'/../config/config.php' => config_path('config.php'),
       		]);
-
+*/
       		$this->mergeConfigFrom(
         		__DIR__.'/../config/config.php', 'zohoinvoice'
     		);
