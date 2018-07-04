@@ -32,7 +32,7 @@
 				$config = [];
 				$config['authtoken'] = config('zohoinvoice.authtoken');
 				$config['organization_id'] = config('zohoinvoice.organization');
-				$config['baseurl'] = config('zohoinvoice.baseurl', 'https://invoice.zoho.eu/api/v3/');
+				$config['baseurl'] = config('zohoinvoice.baseurl', 'https://invoice.zoho.eu/api/v3');
 				return new ZohoInvoiceClient($config);
 			});
 		}
