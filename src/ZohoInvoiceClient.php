@@ -153,11 +153,6 @@
 			return $this->call($resource, $params);
 		}
 
-		public function createContact($resource, $params = []) {
-			$this->method = 'POST';
-			return $this->call($resource, $params);
-		}
-
 		public function call($resource, $params = [], $rawResponse = false)
 		{
 			$url = $this->buildUrl($resource);
