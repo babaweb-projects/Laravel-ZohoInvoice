@@ -75,8 +75,7 @@
 			$this->method = 'GET';
 			$resource['resource'] = 'invoices';
 			$resource['id'] = $invoice_id;
-			$params['customer_id'] = $customer_id;
-			return $this->call($resource, $params);
+			return $this->call($resource);
 		}
 
 		public function getInvoicePaymentsByID($invoice_id){
@@ -84,8 +83,7 @@
 			$resource['resource'] = 'invoices';
 			$resource['id'] = $invoice_id;
 			$resource['additional'] = 'payments';
-			$params['customer_id'] = $customer_id;
-			return $this->call($resource, $params);
+			return $this->call($resource);
 		}
 
 		public function createItem($parameters){
