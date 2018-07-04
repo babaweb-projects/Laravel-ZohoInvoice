@@ -16,7 +16,7 @@
       		]);
 
       		$this->mergeConfigFrom(
-        		__DIR__.'/../config/zohoinvoice.php', 'zohoinvoice'
+        		__DIR__.'/../config/config.php', 'zohoinvoice'
     		);
 		}
 
