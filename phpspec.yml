@@ -1,0 +1,4 @@
+suites:
+  library_suite:
+    namespace: Babaweb\ZohoInvoice\Tests
+    psr4_prefix: Babaweb\ZohoInvoice\Tests

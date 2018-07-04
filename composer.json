@@ -1,0 +1,31 @@
+{
+    "name": "babaweb/zohoinvoice",
+    "description": "Zoho Invoice API library",
+    "homepage": "https://github.com/krylovatetiana/zohoinvoice.git",
+    "require": {
+        "php": "^5.3 | ^7.0",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Babaweb\\ZohoInvoice\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "phpspec/phpspec": "~2.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bababwe\\ZohoInvoice\\Tests\\": "tests"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Babaweb",
+            "email": "support@babaweb.fr"
+        }
+    ],
+    "minimum-stability": "stable" 
+}
