@@ -11,10 +11,6 @@
 			if($this->isLumen()){
 				return;
 			}
-
-			$this->publishes([
-				__DIR__ . '/../config/config.php' => config_path('zohoinvoice.php')
-			]);
 		}
 
 		public function register()
