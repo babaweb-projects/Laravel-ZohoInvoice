@@ -12,7 +12,7 @@
 				return;
 			}
 			$this->publishes([
-          		__DIR__.'/../config/config.php' => config_path('zohoinvoice.php'),
+          		__DIR__.'/../config/config.php' => config_path('config.php'),
       		]);
 
       		$this->mergeConfigFrom(
