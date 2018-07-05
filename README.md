@@ -21,6 +21,13 @@ Modifier le fichier `config/app.php` pour y ajouter le _provider_
         Babaweb\ZohoInvoice\ZohoInvoiceServiceProvider::class
     ],
 
+Et la _facade_ 
+
+    'aliases' => [
+        ...
+        'ZohoInvoice' => Babaweb\ZohoInvoice\ZohoInvoiceFacade::class,
+    ],
+
 Enfin publier le fichier :
 
     php artisan vendor:publish --provider="Babaweb\ZohoInvoice\ZohoInvoiceServiceProvider"
