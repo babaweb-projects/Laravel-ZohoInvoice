@@ -1,7 +1,7 @@
 {
-    "name": "babaweb/zohoinvoice",
+    "name": "babaweb/Laravel-ZohoInvoice",
     "description": "Zoho Invoice API library",
-    "homepage": "https://github.com/krylovatetiana/zohoinvoice.git",
+    "homepage": "https://github.com/babaweb-projects/Laravel-ZohoInvoice.git",
     "require": {
         "php": "^5.3 | ^7.0",
         "guzzlehttp/guzzle": "~6.0"
