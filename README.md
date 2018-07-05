@@ -56,15 +56,15 @@ Liste des fonctions disponibles :
 * __getInvoiceList($customer_id)__ : Retourne la liste des factures à partir de l'ID du client
 * __getInvoiceByID($invoice_id)__ : Retourne la facture dont l'ID est passé en paramètre
 * __getInvoicePaymentsByID($invoice_id)__ : Retourne la liste des paiements de facture dont l'ID est passé en paramètre
-* __[createItem($parameters)](#createItem)__ : Créer un item à partir des élements en paramètres
-* __[createInvoice($parameters)](#createInvoice)__ : Créer une facture à partir des élements en paramètres
-* __[createContact($parameters)](#createContact)__ : Créer un contact à partir des élements en paramètres
-* __[updateItem($item_id, $parameters)](#updateItem)__ : Modifie un item à partir des élements en paramètres
+* __[createItem($parameters)](#createitem)__ : Créer un item à partir des élements en paramètres
+* __[createInvoice($parameters)](#createinvoice)__ : Créer une facture à partir des élements en paramètres
+* __[createContact($parameters)](#createcontact)__ : Créer un contact à partir des élements en paramètres
+* __[updateItem($item_id, $parameters)](#updateitem)__ : Modifie un item à partir des élements en paramètres
 
 
 ### Détails des fonctions
 
-#### createItem($parameters) :
+#### createItem ($parameters) :
 
     $parameters = [
         //required
@@ -76,7 +76,7 @@ Liste des fonctions disponibles :
         'product_type' => 'service', //Type de l'item
     ];
 
-#### createInvoice($parameters) :
+#### createInvoice ($parameters) :
 
     $parameters = [
         //required
@@ -87,7 +87,7 @@ Liste des fonctions disponibles :
         'is_discount_before_tax' => true, //Vrai si la réduction s'applique au HT
     ];
 
-#### createContact($parameters) :
+#### createContact ($parameters) :
 
     $parameters = [
         //required
@@ -96,7 +96,7 @@ Liste des fonctions disponibles :
         'company_name' => 'Bowman and Co', //Nom de la société
     ];
 
-#### updateItem($item_id, $parameters) :
+#### updateItem ($item_id, $parameters) :
 
     $parameters = [
         //required
