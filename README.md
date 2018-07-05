@@ -12,7 +12,7 @@ Pour fonctionner, l'ensemble des élements sont nécessaires :
 
 Lancer la commande Composer _require_ :
 
-    composer require babaweb/laravel-zohoinvoice:v0.2
+    composer require babaweb/laravel-zohoinvoice:v0.3
 
 Modifier le fichier `config/app.php` pour y ajouter le _provider_
 
