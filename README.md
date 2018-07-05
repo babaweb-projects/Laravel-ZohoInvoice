@@ -64,7 +64,7 @@ Liste des fonctions disponibles :
 
 ### Détails des fonctions
 
-#### createItem($parameters) :
+#### createItem ($parameters) :
 
     $parameters = [
         //required
@@ -76,7 +76,7 @@ Liste des fonctions disponibles :
         'product_type' => 'service', //Type de l'item
     ];
 
-#### createInvoice($parameters) :
+#### createInvoice ($parameters) :
 
     $parameters = [
         //required
@@ -87,7 +87,7 @@ Liste des fonctions disponibles :
         'is_discount_before_tax' => true, //Vrai si la réduction s'applique au HT
     ];
 
-#### createContact($parameters) :
+#### createContact ($parameters) :
 
     $parameters = [
         //required
@@ -96,7 +96,7 @@ Liste des fonctions disponibles :
         'company_name' => 'Bowman and Co', //Nom de la société
     ];
 
-#### updateItem($item_id, $parameters) :
+#### updateItem ($item_id, $parameters) :
 
     $parameters = [
         //required
