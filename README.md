@@ -10,26 +10,9 @@ Pour fonctionner, l'ensemble des élements sont nécessaires :
 
 ## Installation
 
-Ajouter cette ligne à votre _composer.json_ dans le tableau "require" : 
+Lancer la commande Composer _require_ :
 
-    "require": {
-        "php": ">=7.0.0",
-        "laravel/framework": "5.5.*",
-        "babaweb/zohoinvoice": "dev-master",
-    },
-
-Ajouter le tableau "repositories" :
-
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/babaweb-projects/Laravel-ZohoInvoice"
-        }
-    ],
-
-Mise à jour de _composer_ :
-
-    composer update
+    composer require babaweb/laravel-zohoinvoice
 
 Modifier le fichier `config/app.php` pour y ajouter le _provider_
 
