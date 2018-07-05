@@ -23,7 +23,7 @@ Ajouter le tableau "repositories" :
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/babaweb-projects/zohoinvoice"
+            "url": "https://github.com/babaweb-projects/Laravel-ZohoInvoice"
         }
     ],
 
