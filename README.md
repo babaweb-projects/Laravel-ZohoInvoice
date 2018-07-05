@@ -57,9 +57,9 @@ Liste des fonctions disponibles :
 * __getInvoiceByID($invoice_id)__ : Retourne la facture dont l'ID est passé en paramètre
 * __getInvoicePaymentsByID($invoice_id)__ : Retourne la liste des paiements de facture dont l'ID est passé en paramètre
 * __[createItem($parameters)](#createitemparameters-)__ : Créer un item à partir des élements en paramètres
-* __[createInvoice($parameters)](#createivoiceparameters-)__ : Créer une facture à partir des élements en paramètres
+* __[createInvoice($parameters)](#createinvoiceparameters-)__ : Créer une facture à partir des élements en paramètres
 * __[createContact($parameters)](#createcontactparameters-)__ : Créer un contact à partir des élements en paramètres
-* __[updateItem($item_id, $parameters)](#updateitemparameters-)__ : Modifie un item à partir des élements en paramètres
+* __[updateItem($item_id, $parameters)](#updateitemitem_id-parameters-)__ : Modifie un item à partir des élements en paramètres
 
 
 ### Détails des fonctions
