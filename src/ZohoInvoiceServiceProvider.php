@@ -8,13 +8,13 @@
 	{
 		public function boot()
 		{
-			if($this->isLumen()){
+			if($this->isLumen()) {
 				return;
 			}
 
-      		$this->mergeConfigFrom(
-        		__DIR__.'/../config/zohoinvoice.php', 'zohoinvoice'
-    		);
+			$this->publishes([
+       				__DIR__.'/../config/zohoinvoice.php' => config_path('zohoinvoice.php'),
+    			]);
 		}
 
 		public function register()
