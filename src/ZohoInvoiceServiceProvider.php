@@ -6,31 +6,14 @@
 
 	class ZohoInvoiceServiceProvider extends ServiceProvider
 	{
-		public function boot()
-		{
-			if($this->isLumen()) {
-				return;
-			}
-
-			$this->publishes([
-       				__DIR__.'/../config/zohoinvoice.php' => config_path('zohoinvoice.php'),
-    			]);
-		}
-
 		public function register()
-		{
-            $this->app->bind('Babaweb\ZohoInvoice\ZohoInvoice', function($app){
-                if($this->isLumen()){
-                    $app->configure('zohoinvoice');
-                }
+        {
+            $this->app->bind('zohoinvoice', 'Babaweb\ZohoInvoice\ZohoInvoice');
 
-                return new ZohoInvoiceClient();
-            });
-		}
+            $config = __DIR__ . '/../config/zohoinvoice.php';
+            $this->mergeConfigFrom($config, 'zohoinvoice');
 
-		private function isLumen()
-		{
-			return is_a(\app(), 'Laravel\Lumen\Application');
-		}
+            $this->publishes([__DIR__ . '/../config/zohoinvoice.php' => config_path('zohoinvoice.php')], 'config');
+        }
 	}
 ?>
