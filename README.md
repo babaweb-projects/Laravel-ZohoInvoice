@@ -21,12 +21,6 @@ Modifier le fichier `config/app.php` pour y ajouter le _provider_
         Babaweb\ZohoInvoice\ZohoInvoiceServiceProvider::class
     ],
 
-Et la _facade_ 
-
-    'aliases' => [
-        ...
-        'ZohoInvoice' => Babaweb\ZohoInvoice\Facades\ZohoInvoice::class,
-    ],
 
 Enfin publier le fichier :
 
@@ -47,11 +41,11 @@ Pour les renseigner, il faut ouvrir le fichier dans `config/zohoinvoice.php` :
 
 Ajouter la facade : 
 
-    use Babaweb\ZohoInvoice\ZohoInvoiceClient;
+    use Babaweb\ZohoInvoice\ZohoInvoice;
 
 Par exemple avec la fonction `test` :
 
-    public function test(ZohoInvoiceClient $client) {
+    public function test(ZohoInvoice $client) {
         //Vos requêtes ici 
     }
 
