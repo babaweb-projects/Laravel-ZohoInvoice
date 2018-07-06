@@ -19,22 +19,13 @@
 
 		public function register()
 		{
-			$this->registerZoho();
-		}
+		    $this->app->bind('Babaweb\ZohoInvoice\ZohoInvoiceClient', function($app){
+			if($this->isLumen()){
+			    $app->configure('zohoinvoice');
+			}
 
-		private function registerZoho()
-		{
-			$this->app->bind('Babaweb\ZohoInvoice\ZohoInvoiceClient', function($app){
-				if($this->isLumen()){
-					$app->configure('zohoinvoice');
-				} 
-
-				$config = [];
-				$config['authtoken'] = config('zohoinvoice.authtoken');
-				$config['organization_id'] = config('zohoinvoice.organization_id');
-				$config['baseurl'] = config('zohoinvoice.baseurl', 'https://invoice.zoho.eu/api/v3');
-				return new ZohoInvoiceClient($config);
-			});
+			return new ZohoInvoiceClient();
+		    });
 		}
 
 		private function isLumen()
