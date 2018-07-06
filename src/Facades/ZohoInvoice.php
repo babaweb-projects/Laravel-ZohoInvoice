@@ -4,7 +4,7 @@ namespace Babaweb\ZohoInvoice\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class ZohoInvoiceFacade extends Facade {
+class ZohoInvoice extends Facade {
 	
     protected static function getFacadeAccessor() {
         return 'zohoinvoice';
