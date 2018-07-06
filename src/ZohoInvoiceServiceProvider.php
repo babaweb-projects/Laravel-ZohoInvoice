@@ -19,13 +19,13 @@
 
 		public function register()
 		{
-		    $this->app->bind('Babaweb\ZohoInvoice\ZohoInvoiceClient', function($app){
-			if($this->isLumen()){
-			    $app->configure('zohoinvoice');
-			}
+            $this->app->bind('Babaweb\ZohoInvoice\ZohoInvoiceClient', function($app){
+                if($this->isLumen()){
+                    $app->configure('zohoinvoice');
+                }
 
-			return new ZohoInvoiceClient();
-		    });
+                return new ZohoInvoiceClient();
+            });
 		}
 
 		private function isLumen()
