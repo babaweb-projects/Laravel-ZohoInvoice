@@ -11,10 +11,10 @@
 		protected $url;
 		protected $httpMethod = 'POST';
 
-		public function __construct($config){
-			$this->baseUrl = $config['baseurl'] . '/';
-			$this->organization_id = $config['organization_id'];
-			$this->authtoken = $config['authtoken'];
+		public function __construct(){
+			$this->baseUrl =  config('zohoinvoice.baseurl') . '/';
+			$this->organization_id = config('zohoinvoice.organization_id');
+			$this->authtoken = config('zohoinvoice.authtoken');
 			$this->client = new Client(['base_uri' => $this->baseUrl]);
 		}
 
