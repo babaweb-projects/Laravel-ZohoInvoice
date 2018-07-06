@@ -1,6 +1,6 @@
 <?php
 
-namespace Babaweb\ZohoInvoice;
+namespace Babaweb\ZohoInvoice\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
