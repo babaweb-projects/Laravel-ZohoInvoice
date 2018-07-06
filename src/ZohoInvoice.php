@@ -5,7 +5,7 @@
 	use GuzzleHttp\Client;
 	use Exception;
 
-	class ZohoInvoiceClient{
+	class ZohoInvoice{
 		protected $baseUrl;
 		protected $client;
 		protected $url;
