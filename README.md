@@ -12,7 +12,7 @@ Pour fonctionner, l'ensemble des élements sont nécessaires :
 
 Lancer la commande Composer _require_ :
 
-    composer require babaweb/laravel-zohoinvoice:v0.3
+    composer require babaweb/laravel-zohoinvoice
 
 Modifier le fichier `config/app.php` pour y ajouter le _provider_
 
@@ -25,7 +25,7 @@ Et la _facade_
 
     'aliases' => [
         ...
-        'ZohoInvoice' => Babaweb\ZohoInvoice\ZohoInvoiceFacade::class,
+        'ZohoInvoice' => Babaweb\ZohoInvoice\Facades\ZohoInvoice::class,
     ],
 
 Enfin publier le fichier :
