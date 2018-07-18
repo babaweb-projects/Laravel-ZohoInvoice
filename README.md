@@ -53,10 +53,10 @@ Par exemple avec la fonction `test` :
 
 Liste des fonctions disponibles :
 
-* __getContactList()__ : Retourne la liste des contacts
-* __getInvoiceList($customer_id)__ : Retourne la liste des factures à partir de l'ID du client
-* __getInvoiceByID($invoice_id)__ : Retourne la facture dont l'ID est passé en paramètre
-* __getInvoicePaymentsByID($invoice_id)__ : Retourne la liste des paiements de facture dont l'ID est passé en paramètre
+* __getContacts()__ : Retourne la liste des contacts
+* __getInvoices($customer_id)__ : Retourne la liste des factures à partir de l'ID du client
+* __getInvoice($invoice_id)__ : Retourne la facture dont l'ID est passé en paramètre
+* __getInvoicePayments($invoice_id)__ : Retourne la liste des paiements de facture dont l'ID est passé en paramètre
 * __[createItem($parameters)](#createitemparameters-)__ : Créer un item à partir des élements en paramètres
 * __[createInvoice($parameters)](#createinvoiceparameters-)__ : Créer une facture à partir des élements en paramètres
 * __[createContact($parameters)](#createcontactparameters-)__ : Créer un contact à partir des élements en paramètres
