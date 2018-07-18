@@ -9,15 +9,16 @@ class ZohoInvoice
 {
     private $baseUrl;
     private $client;
-    private $httpMethod = 'POST';
-    private $authToken = 'POST';
-    private $organizationId = 'POST';
+    private $httpMethod;
+    private $authToken;
+    private $organizationId;
 
     /**
      * ZohoInvoice constructor.
      */
     public function __construct()
     {
+        $this->setHttpMethod('POST');
         $this->setBaseUrl(config('zohoinvoice.baseurl') . '/');
         $this->setOrganizationId(config('zohoinvoice.organization_id'));
         $this->setAuthToken(config('zohoinvoice.authtoken'));
