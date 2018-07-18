@@ -1,193 +1,433 @@
-<?php 
-	
-	namespace Babaweb\ZohoInvoice;
+<?php
 
-	use GuzzleHttp\Client;
-	use Exception;
+namespace Babaweb\ZohoInvoice;
 
-	class ZohoInvoice{
-		protected $baseUrl;
-		protected $client;
-		protected $url;
-		protected $httpMethod = 'POST';
+use Exception;
+use GuzzleHttp\Client;
 
-		public function __construct(){
-			$this->baseUrl =  config('zohoinvoice.baseurl') . '/';
-			$this->organization_id = config('zohoinvoice.organization_id');
-			$this->authtoken = config('zohoinvoice.authtoken');
-			$this->client = new Client(['base_uri' => $this->baseUrl]);
-		}
+class ZohoInvoice
+{
+    private $baseUrl;
+    private $client;
+    private $httpMethod = 'POST';
+    private $authToken = 'POST';
+    private $organizationId = 'POST';
 
-		public function setClient($client)
-		{
-			$this->client = $client;
-		}
+    /**
+     * ZohoInvoice constructor.
+     */
+    public function __construct()
+    {
+        $this->setBaseUrl(config('zohoinvoice.baseurl') . '/');
+        $this->setOrganizationId(config('zohoinvoice.organization_id'));
+        $this->setAuthToken(config('zohoinvoice.authtoken'));
+        $this->setClient();
+    }
 
-		public function getClient()
-		{
-			return $this->client;
-		}
+    /**
+     * Setter of baseUrl attribute
+     *
+     * @param $baseUrl
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
+    }
 
-		public function setOrganization($organization_id)
-		{
-			$this->organization_id = $organization_id;
-		}
+    /**
+     * Getter of baseUrl attribute
+     *
+     * @return mixed
+     */
+    public function getBaseUrl()
+    {
+        return $this->baseUrl;
+    }
 
-		public function getOrganization()
-		{
-			return $this->organization_id;
-		}
+    /**
+     * Setter of client attribute
+     *
+     * @param $client
+     */
+    public function setClient($client)
+    {
+        if (!$client) {
+            $this->client = new Client(['base_uri' => $this->getBaseUrl()]);
+        }
 
-		public function setBaseUrl($baseUrl)
-		{
-			$this->baseUrl = $baseUrl;
-		}
+        $this->client = $client;
+    }
 
-		public function getBaseUrl()
-		{
-			return $this->baseUrl;
-		}
+    /**
+     * Getter of client attribute
+     *
+     * @return mixed
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
 
-		public function buildUrl($resource){
-			if(!isset($resource['id'])){
-				return $this->baseUrl . $resource['resource'] ;
-			} if(isset($resource['id']) && isset($resource['additional'])) {
-				return $this->baseUrl . $resource['resource'] . '/' . $resource['id'] . '/' . $resource['additional'];
-			} else {
-				return $this->baseUrl . $resource['resource'] . '/' . $resource['id'];
-			}		
-		}
+    /**
+     * Setter of httpMethod attribute
+     *
+     * @param $httpMethod
+     */
+    public function setHttpMethod($httpMethod)
+    {
+        $this->httpMethod = $httpMethod;
+    }
 
-		public function getContactList(){
-			$this->method = 'GET';
-			$resource['resource'] = 'contacts';
-			return $this->call($resource);
-		}
+    /**
+     * Getter of httpMethod attribute
+     *
+     * @return string
+     */
+    public function getHttpMethod()
+    {
+        return $this->httpMethod;
+    }
 
-		public function getInvoiceList($customer_id){
-			$this->method = 'GET';
-			$resource['resource'] = 'invoices';
-			$params['customer_id'] = $customer_id;
-			return $this->call($resource, $params);
-		}
+    /**
+     * Setter of authToken attribute
+     *
+     * @param $authToken
+     */
+    public function setAuthToken($authToken)
+    {
+        $this->authToken = $authToken;
+    }
 
-		public function getInvoiceByID($invoice_id){
-			$this->method = 'GET';
-			$resource['resource'] = 'invoices';
-			$resource['id'] = $invoice_id;
-			return $this->call($resource);
-		}
+    /**
+     * Getter of authToken attribute
+     *
+     * @return string
+     */
+    public function getAuthToken()
+    {
+        return $this->authToken;
+    }
 
-		public function getInvoicePaymentsByID($invoice_id){
-			$this->method = 'GET';
-			$resource['resource'] = 'invoices';
-			$resource['id'] = $invoice_id;
-			$resource['additional'] = 'payments';
-			return $this->call($resource);
-		}
+    /**
+     * Setter of organizationId attribute
+     *
+     * @param $organizationId
+     */
+    public function setOrganizationId($organizationId)
+    {
+        $this->organizationId = $organizationId;
+    }
 
-		public function createItem($parameters){
-			$this->method = 'POST';
-			$resource['resource'] = 'items';
-			$params['JSONString'] = json_encode($parameters);
-			return $this->call($resource, $params);
-		}
+    /**
+     * Getter of organizationId attribute
+     *
+     * @return string
+     */
+    public function getOrganizationId()
+    {
+        return $this->organizationId;
+    }
 
-		public function createInvoice($parameters){
-			$this->method = 'POST';
-			$resource['resource'] = 'invoices';
-			$params['JSONString'] = json_encode($parameters);
-			return $this->call($resource, $params);
-		}
 
-		public function createContact($parameters){
-			$this->method = 'POST';
-			$resource['resource'] = 'contacts';
-			$params['JSONString'] = json_encode($parameters);
-			return $this->call($resource, $params);
-		}
 
-		public function updateItem($item_id, $parameters){
-			$this->method = 'PUT';
-			$resource['resource'] = 'items';
-			$resource['id'] = $item_id;
-			$params['JSONString'] = json_encode($parameters);
-			return $this->call($resource, $params);
-		}
+    /**----------**/
 
-		public function get($resource, $params = []) {
-			$this->method = 'GET';
-			return $this->call($resource, $params);
-		}
 
-		public function post($resource, $params = [])
-		{
-			$this->method = 'POST';
-			return $this->call($resource, $params);
-		}
+    /**
+     * Return the contacts list of the organization
+     *
+     * @return mixed
+     */
+    public function getContacts()
+    {
+        $this->setHttpMethod('GET');
 
-		public function put($resource, $params = [])
-		{
-			if(!isset($resource['id'])){
-				throw new Exception('id is required');
-			}
-			$this->method = 'PUT';
-			return $this->call($resource, $params);
-		}
+        $resource['resource'] = 'contacts';
 
-		public function call($resource, $params = [], $rawResponse = false)
-		{
-			$url = $this->buildUrl($resource);
+        return $this->call($resource);
+    }
 
-			if(!isset($params['authtoken'])){
-				$params['authtoken'] = $this->authtoken;
-			}
+    /**
+     * Return the invoices list of the organization
+     *
+     * @param $customer_id
+     * @return mixed
+     */
+    public function getInvoices($customer_id)
+    {
+        $this->setHttpMethod('GET');
 
-			if(!isset($params['organization_id'])){
-				$params['organization_id'] = $this->organization_id;
-			}
-			$finalUrl = $url . '?' . $this->parseParams($params);
-			$response = $this->client->request($this->method, $finalUrl);
+        $resource['resource'] = 'invoices';
 
-			if(!isset($response)) {
-				throw new Exception('No response.');
-			}
+        $params['customer_id'] = $customer_id;
 
-			if($rawResponse){
-				return $response->getBody();
-			}
-			$response = \GuzzleHttp\json_decode($response->getBody());
-			return $response;
-		}
+        return $this->call($resource, $params);
+    }
 
-		public function getResponse($response)
-		{
-			$result = json_decode($response);
+    /**
+     * Return the invoice by its ID
+     *
+     * @param $invoice_id
+     * @return mixed
+     */
+    public function getInvoice($invoice_id)
+    {
+        $this->setHttpMethod('GET');
 
-			if(!isset($result)){
-				throw new Exception('No response.');
-			}
+        $resource['resource'] = 'invoices';
+        $resource['id'] = $invoice_id;
 
-			return $response;
-		}
+        return $this->call($resource);
+    }
 
-		public function parseParams($params){
-			if(!$params || count($params) < 1){
-				throw new Exception ('No params specified.');
-			}
+    /**
+     * Return the invoice payments by invoice ID
+     *
+     * @param $invoice_id
+     * @return mixed
+     */
+    public function getInvoicePayments($invoice_id)
+    {
+        $this->setHttpMethod('GET');
 
-			$query = '';
+        $resource['resource'] = 'invoices';
+        $resource['id'] = $invoice_id;
+        $resource['additional'] = 'payments';
 
-			foreach($params as $key => $value){
-				if($query === '' || strlen($query) == 0){
-					$query = $key . '=' . $value;
-				} else {
-					$query .= '&' . $key . '=' . $value;
-				}
-			}
-			return $query;
-		}
+        return $this->call($resource);
+    }
 
-	}
 
-?>
+
+    /**----------**/
+
+
+    /**
+     * Add a new item
+     *
+     * @param $parameters
+     * @return mixed
+     */
+    public function createItem($parameters)
+    {
+        $this->setHttpMethod('POST');
+
+        $resource['resource'] = 'items';
+
+        $params['JSONString'] = json_encode($parameters);
+
+        return $this->call($resource, $params);
+    }
+
+    /**
+     * Update the item by its id
+     *
+     * @param $item_id
+     * @param $parameters
+     * @return mixed
+     */
+    public function updateItem($item_id, $parameters)
+    {
+        $this->setHttpMethod('PUT');
+
+        $resource['resource'] = 'items';
+        $resource['id'] = $item_id;
+
+        $params['JSONString'] = json_encode($parameters);
+
+        return $this->call($resource, $params);
+    }
+
+    /**
+     * Create a new contact
+     *
+     * @param $parameters
+     * @return mixed
+     */
+    public function createContact($parameters)
+    {
+        $this->setHttpMethod('POST');
+
+        $resource['resource'] = 'contacts';
+
+        $params['JSONString'] = json_encode($parameters);
+
+        return $this->call($resource, $params);
+    }
+
+    /**
+     * Update the contact by its id
+     *
+     * @param $contact_id
+     * @param $parameters
+     * @return mixed
+     */
+    public function updateContact($contact_id, $parameters)
+    {
+        $this->setHttpMethod('PUT');
+
+        $resource['resource'] = 'contacts';
+        $resource['id'] = $contact_id;
+
+        $params['JSONString'] = json_encode($parameters);
+
+        return $this->call($resource, $params);
+    }
+
+    /**
+     * Create a new invoice
+     *
+     * @param $parameters
+     * @return mixed
+     */
+    public function createInvoice($parameters)
+    {
+        $this->setHttpMethod('POST');
+
+        $resource['resource'] = 'invoices';
+
+        $params['JSONString'] = json_encode($parameters);
+
+        return $this->call($resource, $params);
+    }
+
+
+
+    /**----------**/
+
+
+    /**
+     * Run a get call
+     *
+     * @param $resource
+     * @param array $params
+     * @return mixed
+     */
+    public function get($resource, $params = [])
+    {
+        $this->setHttpMethod('GET');
+
+        return $this->call($resource, $params);
+    }
+
+    /**
+     * Run a post call
+     *
+     * @param $resource
+     * @param array $params
+     * @return mixed
+     */
+    public function post($resource, $params = [])
+    {
+        $this->setHttpMethod('POST');
+
+        return $this->call($resource, $params);
+    }
+
+    /**
+     * Run a put call
+     *
+     * @param $resource
+     * @param array $params
+     * @return mixed
+     * @throws Exception
+     */
+    public function put($resource, $params = [])
+    {
+        if (!isset($resource['id'])) {
+            throw new Exception('id is required');
+        }
+
+        $this->setHttpMethod('PUT');
+
+        return $this->call($resource, $params);
+    }
+
+    /**
+     * Run the call
+     *
+     * @param $resource
+     * @param array $params
+     * @param bool $rawResponse
+     * @return mixed
+     * @throws Exception
+     */
+    private function call($resource, $params = [], $rawResponse = false)
+    {
+        $url = $this->buildUrl($resource, $params);
+
+        if (!isset($params['authtoken'])) {
+            $params['authtoken'] = $this->getAuthToken();
+        }
+
+        if (!isset($params['organization_id'])) {
+            $params['organization_id'] = $this->getOrganizationId();
+        }
+
+        $response = $this->getClient()->request($this->getHttpMethod(), $url);
+
+        return $this->getResponse($response, $rawResponse);
+    }
+
+    /**
+     * Build the url by the ressource array
+     *
+     * @param $resource
+     * @param $params
+     * @return string
+     * @throws Exception
+     */
+    private function buildUrl($resource, $params)
+    {
+        if (!isset($resource['id'])) {
+            return $this->getBaseUrl() . $resource['resource'] . '?' . $this->parseParams($params);
+        }
+
+        if (isset($resource['id']) && isset($resource['additional'])) {
+            $url = $this->getBaseUrl() . $resource['resource'] . '/' . $resource['id'] . '/' . $resource['additional'];
+        } else {
+            $url = $this->getBaseUrl() . $resource['resource'] . '/' . $resource['id'];
+        }
+
+        return $url . '?' . $this->parseParams($params);
+    }
+
+    /**
+     * Parse params array to build the query
+     *
+     * @param $params
+     * @return string
+     * @throws Exception
+     */
+    private function parseParams($params)
+    {
+        if (empty($params)) {
+            throw new Exception ('No params specified.');
+        }
+
+        return http_build_query($params);
+    }
+
+    /**
+     * Parse response
+     *
+     * @param $response
+     * @param $rawResponse
+     * @return mixed
+     * @throws Exception
+     */
+    private function getResponse($response, $rawResponse)
+    {
+        if (!isset($response)) {
+            throw new Exception('No response.');
+        }
+
+        if ($rawResponse) {
+            return $response->getBody();
+        }
+
+        $response = \GuzzleHttp\json_decode($response->getBody());
+
+        return $response;
+    }
+}
