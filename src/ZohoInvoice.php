@@ -49,13 +49,13 @@ class ZohoInvoice
      *
      * @param $client
      */
-    public function setClient($client)
+    public function setClient($client = null)
     {
         if (!$client) {
             $this->client = new Client(['base_uri' => $this->getBaseUrl()]);
+        } else {
+            $this->client = $client;
         }
-
-        $this->client = $client;
     }
 
     /**
@@ -354,8 +354,6 @@ class ZohoInvoice
      */
     private function call($resource, $params = [], $rawResponse = false)
     {
-        $url = $this->buildUrl($resource, $params);
-
         if (!isset($params['authtoken'])) {
             $params['authtoken'] = $this->getAuthToken();
         }
@@ -364,7 +362,9 @@ class ZohoInvoice
             $params['organization_id'] = $this->getOrganizationId();
         }
 
-        $response = $this->getClient()->request($this->getHttpMethod(), $url);
+        $url = $this->buildUrl($resource, $params);
+
+        $response = $this->client->request($this->getHttpMethod(), $url);
 
         return $this->getResponse($response, $rawResponse);
     }
