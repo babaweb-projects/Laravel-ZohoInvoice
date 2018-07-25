@@ -304,11 +304,11 @@ class ZohoInvoice
      * @param array $params
      * @return mixed
      */
-    public function get($resource, $params = [])
+    public function get($resource, $params = [], $rawResponse = false)
     {
         $this->setHttpMethod('GET');
 
-        return $this->call($resource, $params);
+        return $this->call($resource, $params, $rawResponse);
     }
 
     /**
@@ -318,11 +318,11 @@ class ZohoInvoice
      * @param array $params
      * @return mixed
      */
-    public function post($resource, $params = [])
+    public function post($resource, $params = [], $rawResponse = false)
     {
         $this->setHttpMethod('POST');
 
-        return $this->call($resource, $params);
+        return $this->call($resource, $params, $rawResponse);
     }
 
     /**
@@ -333,7 +333,7 @@ class ZohoInvoice
      * @return mixed
      * @throws Exception
      */
-    public function put($resource, $params = [])
+    public function put($resource, $params = [], $rawResponse = false)
     {
         if (!isset($resource['id'])) {
             throw new Exception('id is required');
@@ -341,7 +341,7 @@ class ZohoInvoice
 
         $this->setHttpMethod('PUT');
 
-        return $this->call($resource, $params);
+        return $this->call($resource, $params, $rawResponse);
     }
 
     /**
