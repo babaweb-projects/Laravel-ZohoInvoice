@@ -297,6 +297,27 @@ class ZohoInvoice
     /**----------**/
 
 
+
+    /**
+     * Return the url of a request
+     *
+     * @param $resource
+     * @param array $params
+     * @return string
+     * @throws Exception
+     */
+    public function generateUrl($resource, $params = []) {
+        if (!isset($params['authtoken'])) {
+            $params['authtoken'] = $this->getAuthToken();
+        }
+
+        if (!isset($params['organization_id'])) {
+            $params['organization_id'] = $this->getOrganizationId();
+        }
+
+        return $this->buildUrl($resource, $params);
+    }
+
     /**
      * Run a get call
      *
