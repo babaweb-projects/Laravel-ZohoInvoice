@@ -292,6 +292,23 @@ class ZohoInvoice
         return $this->call($resource, $params);
     }
 
+    /**
+     * Create a new invoice payment
+     *
+     * @param $parameters
+     * @return mixed
+     */
+    public function createInvoicePayment($parameters)
+    {
+        $this->setHttpMethod('POST');
+
+        $resource['resource'] = 'customerpayments';
+
+        $params['JSONString'] = json_encode($parameters);
+
+        return $this->call($resource, $params);
+    }
+
 
 
     /**----------**/
