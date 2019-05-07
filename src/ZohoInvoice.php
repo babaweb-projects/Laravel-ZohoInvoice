@@ -133,6 +133,19 @@ class ZohoInvoice
 
     /**----------**/
 
+    /**
+     * Return the contacts list of the organization
+     *
+     * @return mixed
+     */
+    public function getTaxes()
+    {
+        $this->setHttpMethod('GET');
+
+        $resource['resource'] = 'settings/taxes';
+
+        return $this->call($resource);
+    }
 
     /**
      * Return the contacts list of the organization
@@ -194,6 +207,40 @@ class ZohoInvoice
         $resource['resource'] = 'invoices';
         $resource['id'] = $invoice_id;
         $resource['additional'] = 'payments';
+
+        return $this->call($resource);
+    }
+
+    /**
+     * Update the invoice by its id
+     *
+     * @param $item_id
+     * @param $parameters
+     * @return mixed
+     */
+    public function updateInvoice($invoice_id, $parameters){
+        $this->setHttpMethod('PUT');
+
+        $resource['resource'] = 'invoices';
+        $resource['id'] = $invoice_id;
+
+        $params['JSONString'] = json_encode($parameters);
+
+        return $this->call($resource, $params);
+    }
+
+    /**
+     * Delete the invoice by its id
+     *
+     * @param $item_id
+     * @param $parameters
+     * @return mixed
+     */
+    public function deleteInvoice($invoice_id){
+        $this->setHttpMethod('DELETE');
+
+        $resource['resource'] = 'invoices';
+        $resource['id'] = $invoice_id;
 
         return $this->call($resource);
     }
